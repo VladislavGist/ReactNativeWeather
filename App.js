@@ -19,6 +19,8 @@ import {
 
 import Forecast from './Forecast';
 
+import OpenWeatherMap from './open_weather_map';
+
 class App extends Component {
   state = {
     zip: '',
@@ -26,7 +28,11 @@ class App extends Component {
   };
 
   _handleTextChange = event => {
-    this.setState({zip: event.nativeEvent.text});
+    let zip = event.nativeEvent.text;
+
+    OpenWeatherMap.fetchForecast(zip).then(forecast => {
+      this.setState({forecast});
+    });
   };
 
   render() {
@@ -62,7 +68,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#666666',
   },
   welcome: {fontSize: 20, textAlign: 'center', margin: 10},
   input: {
