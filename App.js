@@ -13,6 +13,7 @@ import {
   ScrollView,
   View,
   Text,
+  ImageBackground,
   StatusBar,
   TextInput,
 } from 'react-native';
@@ -51,14 +52,21 @@ class App extends Component {
     }
 
     return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.welcome}>Your input {this.state.zip}</Text>
-        {content}
-        <TextInput
-          style={styles.input}
-          onSubmitEditing={this._handleTextChange}
-        />
-      </SafeAreaView>
+			<SafeAreaView style={styles.container}>
+				<ImageBackground
+					source={require('./flowers.png')}
+					style={styles.backdrop}
+					>
+					<Text style={styles.welcome}>Your input {this.state.zip}</Text>
+
+					{content}
+
+					<TextInput
+						style={styles.input}
+						onSubmitEditing={this._handleTextChange}
+					/>
+				</ImageBackground>
+			</SafeAreaView>
     );
   }
 }
@@ -77,7 +85,11 @@ const styles = StyleSheet.create({
     padding: 2,
     height: 40,
     width: 100,
-    textAlign: 'center',
+  },
+  backdrop: {
+    flex: 1,
+		flexDirection: 'column',
+		width: '100%',
   },
 });
 
